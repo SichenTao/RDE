@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.pyc
+build/
+outputs/
+*.o
+*.out
+*.exe
+*.so
+*.dylib
+*.dll
+*.mat
+*.zip
+*.pdf
+time_complexity.txt

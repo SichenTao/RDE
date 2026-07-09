@@ -4,6 +4,12 @@
 ![Track](https://img.shields.io/badge/Track-BC--SOPs-green)
 ![Language](https://img.shields.io/badge/Language-C%2B%2B%20%2B%20Python-lightgrey)
 
+<p align="center">
+  <strong>English</strong> |
+  <a href="README.zh-CN.md">中文</a> |
+  <a href="README.ja.md">日本語</a>
+</p>
+
 **RDE is the Runner-Up Award entry for the IEEE WCCI 2024 / IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed, bound-constrained single-objective track.**
 
 This repository provides a clean open-source package in the same layout style as the RDE26-SOP competition repository.

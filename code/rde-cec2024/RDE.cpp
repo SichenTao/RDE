@@ -791,6 +791,7 @@ void Optimizer::MainCycle(int RunN) {
                 }
             }
 
+            FindLimits(PopulTemp[TheChosenOne], Popul[TheChosenOne], NVars, Left, Right);
             FitTemp[TheChosenOne] = cec_17_(PopulTemp[TheChosenOne], func_num);
             if (FitTemp[TheChosenOne] <= globalbest)
                 globalbest = FitTemp[TheChosenOne];

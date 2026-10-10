@@ -14,8 +14,8 @@ authors:
 version: 1.1.0
 date-released: 2026-10-10
 license: MIT
-repository-code: "https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE"
-url: "https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE"
+repository-code: "https://github.com/SichenTao/RDE"
+url: "https://github.com/SichenTao/RDE"
 abstract: >-
   C++ source of RDE, the differential evolution solver that received the Runner-Up
   Award in the bound-constrained single-objective track of the IEEE WCCI 2024 /

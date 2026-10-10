@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "RDE: Reconstructed Differential Evolution for the IEEE WCCI/CEC 2024 numerical optimization competition"
+type: software
+authors:
+  - family-names: Tao
+    given-names: Sichen
+  - family-names: Zhao
+    given-names: Ruihan
+  - family-names: Wang
+    given-names: Kaiyu
+  - family-names: Gao
+    given-names: Shangce
+version: 1.1.0
+date-released: 2026-10-10
+license: MIT
+repository-code: "https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE"
+url: "https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE"
+abstract: >-
+  C++ source of RDE, the differential evolution solver that received the Runner-Up
+  Award in the bound-constrained single-objective track of the IEEE WCCI 2024 /
+  IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed.
+keywords:
+  - differential evolution
+  - numerical optimization
+  - evolutionary algorithm
+  - IEEE CEC 2024
+# TODO: add "doi:" with the Zenodo version DOI after the release is archived
+preferred-citation:
+  type: article
+  title: "An Efficient Reconstructed Differential Evolution Variant by Some of the Current State-of-the-art Strategies for Solving Single Objective Bound Constrained Problems"
+  authors:
+    - family-names: Tao
+      given-names: Sichen
+    - family-names: Zhao
+      given-names: Ruihan
+    - family-names: Wang
+      given-names: Kaiyu
+    - family-names: Gao
+      given-names: Shangce
+  journal: "arXiv preprint arXiv:2404.16280"
+  year: 2024
+  doi: 10.48550/arXiv.2404.16280

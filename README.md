@@ -1,8 +1,4 @@
-# 🥈 RDE for IEEE WCCI / CEC 2024 Competition
-
-![IEEE CEC 2024](https://img.shields.io/badge/IEEE%20CEC%202024-Runner--Up-silver)
-![Track](https://img.shields.io/badge/Track-BC--SOPs-green)
-![Language](https://img.shields.io/badge/Language-C%2B%2B%20%2B%20Python-lightgrey)
+# RDE: Runner-Up Award in the bound-constrained single-objective track of the IEEE WCCI/CEC 2024 numerical optimization competition ([arXiv:2404.16280](https://arxiv.org/abs/2404.16280))
 
 <p align="center">
   <strong>English</strong> |
@@ -10,61 +6,50 @@
   <a href="README.ja.md">日本語</a>
 </p>
 
-**RDE is the Runner-Up Award entry for the IEEE WCCI 2024 / IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed, bound-constrained single-objective track.**
+RDE (Reconstructed Differential Evolution) is the differential evolution solver that received the Runner-Up Award in the bound-constrained single-objective track (BC-SOPs) of the IEEE WCCI 2024 / IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed. This repository contains its C++ source, the CEC 2017 evaluator with its data, and a run script.
 
-This repository provides a clean open-source package in the same layout style as the RDE26-SOP competition repository.
+Version 1.0.0 corresponds to the results in the 2024 report; version 1.1.0 corrects the boundary handling after the Cauchy perturbation (see [CHANGELOG.md](CHANGELOG.md)).
 
-## 🥈 Competition Result
+## Competition result
 
 | Item | Description |
 | --- | --- |
 | Achievement | Runner-Up Award |
 | Competition | IEEE WCCI 2024 / IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed |
-| Track | Bound-constrained single-objective optimization |
-| Benchmark | CEC 2017 real-parameter numerical optimization problems |
-| Runs | 25 independent runs per problem |
+| Track | Bound-constrained single-objective optimization (BC-SOPs) |
+| Benchmark | CEC 2017 real-parameter single-objective functions |
+| Runs | 25 independent runs per function |
 | Budget | 10000 x D function evaluations |
 | Paper | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
 
-## 🧭 RDE Research Line
-
-| Year | Result | Track | Repository | Paper |
-| --- | --- | --- | --- | --- |
-| 2024 | 🥈 Runner-Up Award | IEEE CEC 2024 BC-SOPs | [RDE](https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE) | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
-| 2025 | 🥇 Rank 1 U-score | IEEE CEC 2025 RDEx Series | [RDEx Series](https://github.com/SichenTao/IEEE-CEC-2025-Competition-RDEx-Series) | [SOP](https://arxiv.org/abs/2603.27089), [CSOP](https://arxiv.org/abs/2603.27090), [MOP](https://arxiv.org/abs/2603.27092), [CMOP](https://arxiv.org/abs/2604.03708) |
-| 2026 | 🏆 Champion / Rank 1 | IEEE WCCI 2026 / IEEE CEC 2026 RDE26 Series | [SOP](https://github.com/SichenTao/RDE26-SOP), [CSOP](https://github.com/SichenTao/RDE26-CSOP), [MOP](https://github.com/SichenTao/RDE26-MOP), [CMOP](https://github.com/SichenTao/RDE26-CMOP) | Competition release |
-
-## Team
-
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao.
-
-## Repository Layout
+## Repository layout
 
 | Path | Description |
 | --- | --- |
-| `benchmark/` | Public benchmark materials |
-| `code/rde-cec2024/main.py` | Run entry |
-| `code/rde-cec2024/RDE.cpp` | Final algorithm source |
-| `code/rde-cec2024/cec17_test_func.cpp` | Benchmark evaluator |
-| `code/rde-cec2024/input_data/` | Required benchmark input data |
+| `code/rde-cec2024/main.py` | Build and run script |
+| `code/rde-cec2024/RDE.cpp` | Solver source |
+| `code/rde-cec2024/cec17_test_func.cpp`, `malloc.h`, `input_data/` | CEC 2017 evaluator and its data |
+| `benchmark/CEC2017_SOP/` | The same evaluator and data as a stand-alone copy |
+| `results/v1.1.0/` | Results of version 1.1.0 (D = 30, 25 runs, 30 functions) |
 
-## Requirements
+## Requirements and quick start
 
-- Python 3
-- C++14 compiler
-- No third-party Python package is required
-
-## Quick Start
+Python 3 and a C++14 compiler (`g++` by default; `--cxx` selects another one). No third-party Python package is needed.
 
 ```bash
-python3 code/rde-cec2024/main.py
+python3 code/rde-cec2024/main.py                  # D = 30, functions 1-30, 25 runs each
+python3 code/rde-cec2024/main.py --compile-only   # build only
 ```
 
-Generated outputs are written under `code/rde-cec2024/outputs/`.
+In the released code the dimension is set in `main()` by `GNVarsIter` (0, 1, 2, 3 select D = 10, 30, 50, 100); it is set to D = 30. The program also runs function 2, which is not part of the competition. A full run took about 6 minutes on one core of an Apple-silicon Mac. Results go to `code/rde-cec2024/outputs/`, one file `RDE_CEC2024_D30_F<k>.txt` per function: 1001 rows (checkpoints along the run) and one column per run, holding the error of the best solution found so far (errors of at most 1e-7 are written as 0).
 
-## Citation
+## Related repositories
 
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructed Differential Evolution Variant by Some of the Current State-of-the-art Strategies for Solving Single Objective Bound Constrained Problems," arXiv:2404.16280, 2024.
+The RDE line continues with RDEx (2025) and RDE26 (2026); see the [series overview](https://github.com/SichenTao/reconstructed-differential-evolution).
+
+## Citation and license
+
+Use the "Cite this repository" button (metadata in [CITATION.cff](CITATION.cff)); the paper to cite is:
 
 ```bibtex
 @misc{tao2024efficient,
@@ -77,3 +62,5 @@ Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructe
   doi = {10.48550/arXiv.2404.16280}
 }
 ```
+
+The code is released under the [MIT License](LICENSE). The CEC 2017 evaluator and data come from other authors; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

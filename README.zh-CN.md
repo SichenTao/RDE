@@ -1,8 +1,4 @@
-# 🥈 IEEE WCCI / CEC 2024 竞赛 RDE
-
-![IEEE CEC 2024](https://img.shields.io/badge/IEEE%20CEC%202024-Runner--Up-silver)
-![Track](https://img.shields.io/badge/Track-BC--SOPs-green)
-![Language](https://img.shields.io/badge/Language-C%2B%2B%20%2B%20Python-lightgrey)
+# RDE：IEEE WCCI/CEC 2024 数值优化竞赛有界约束单目标赛道亚军奖（[arXiv:2404.16280](https://arxiv.org/abs/2404.16280)）
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -10,61 +6,50 @@
   <a href="README.ja.md">日本語</a>
 </p>
 
-**RDE 是 IEEE WCCI 2024 / IEEE CEC 2024 数值优化精度与速度竞赛有界约束单目标赛道的亚军奖参赛方案。**
+RDE（Reconstructed Differential Evolution）是在 IEEE WCCI 2024 / IEEE CEC 2024 “兼顾精度与速度的数值优化竞赛”有界约束单目标赛道（BC-SOPs）获得亚军奖的差分进化求解器。本仓库包含它的 C++ 源码、CEC 2017 评价程序及数据，以及运行脚本。
 
-本仓库按与 RDE26-SOP 竞赛仓库一致的结构，提供整洁的开源算法包。
+1.0.0 版对应 2024 年报告中的结果；1.1.0 版修正了 Cauchy 扰动之后的边界处理（见 [CHANGELOG.md](CHANGELOG.md)）。
 
-## 🥈 竞赛结果
+## 竞赛结果
 
 | 项目 | 说明 |
 | --- | --- |
 | 成绩 | 亚军奖 |
 | 竞赛 | IEEE WCCI 2024 / IEEE CEC 2024 数值优化精度与速度竞赛 |
-| 赛道 | 有界约束单目标优化 |
-| 基准 | CEC 2017 实参数值优化问题 |
-| 运行次数 | 每个问题 25 次独立运行 |
+| 赛道 | 有界约束单目标优化（BC-SOPs） |
+| 基准 | CEC 2017 实参数单目标函数 |
+| 运行次数 | 每个函数 25 次独立运行 |
 | 预算 | 10000 x D 次函数评价 |
 | 论文 | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
 
-## 🧭 RDE 研究线
-
-| 年份 | 结果 | 赛道 | 仓库 | 论文 |
-| --- | --- | --- | --- | --- |
-| 2024 | 🥈 亚军奖 | IEEE CEC 2024 BC-SOPs | [RDE](https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE) | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
-| 2025 | 🥇 U-score 第 1 名 | IEEE CEC 2025 RDEx 系列 | [RDEx Series](https://github.com/SichenTao/IEEE-CEC-2025-Competition-RDEx-Series) | [SOP](https://arxiv.org/abs/2603.27089), [CSOP](https://arxiv.org/abs/2603.27090), [MOP](https://arxiv.org/abs/2603.27092), [CMOP](https://arxiv.org/abs/2604.03708) |
-| 2026 | 🏆 冠军 / 第 1 名 | IEEE WCCI 2026 / IEEE CEC 2026 RDE26 系列 | [SOP](https://github.com/SichenTao/RDE26-SOP), [CSOP](https://github.com/SichenTao/RDE26-CSOP), [MOP](https://github.com/SichenTao/RDE26-MOP), [CMOP](https://github.com/SichenTao/RDE26-CMOP) | 竞赛公开版本 |
-
-## 团队
-
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao.
-
-## 仓库结构
+## 目录结构
 
 | 路径 | 说明 |
 | --- | --- |
-| `benchmark/` | 公开基准材料 |
-| `code/rde-cec2024/main.py` | 运行入口 |
-| `code/rde-cec2024/RDE.cpp` | 最终算法源代码 |
-| `code/rde-cec2024/cec17_test_func.cpp` | 基准评价器 |
-| `code/rde-cec2024/input_data/` | 必要的基准输入数据 |
+| `code/rde-cec2024/main.py` | 编译并运行的脚本 |
+| `code/rde-cec2024/RDE.cpp` | 求解器源码 |
+| `code/rde-cec2024/cec17_test_func.cpp`、`malloc.h`、`input_data/` | CEC 2017 评价程序及其数据 |
+| `benchmark/CEC2017_SOP/` | 同一份评价程序和数据的独立副本 |
+| `results/v1.1.0/` | 1.1.0 版的结果（D = 30，25 次运行，30 个函数） |
 
-## 运行需求
+## 环境要求与快速开始
 
-- Python 3
-- C++14 编译器
-- 不需要第三方 Python 包
-
-## 快速开始
+需要 Python 3 和 C++14 编译器（默认 `g++`，可用 `--cxx` 更换）。不需要第三方 Python 包。
 
 ```bash
-python3 code/rde-cec2024/main.py
+python3 code/rde-cec2024/main.py                  # D = 30，函数 1–30，每个函数 25 次
+python3 code/rde-cec2024/main.py --compile-only   # 只编译
 ```
 
-生成结果会写入 `code/rde-cec2024/outputs/`。
+发布的代码在 `main()` 中用 `GNVarsIter` 设置维度（0、1、2、3 分别对应 D = 10、30、50、100），当前设为 D = 30。程序也会运行函数 2，它不属于竞赛函数。完整运行在 Apple 芯片 Mac 的单个核心上约需 6 分钟。结果写到 `code/rde-cec2024/outputs/`，每个函数一个文件 `RDE_CEC2024_D30_F<k>.txt`：1001 行（运行过程中的检查点），每次运行一列，记录到当前为止最优解的误差（不超过 1e-7 的误差写为 0）。
 
-## 引用
+## 相关仓库
 
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructed Differential Evolution Variant by Some of the Current State-of-the-art Strategies for Solving Single Objective Bound Constrained Problems," arXiv:2404.16280, 2024.
+RDE 系列之后是 RDEx（2025）和 RDE26（2026），见[系列总览](https://github.com/SichenTao/reconstructed-differential-evolution)。
+
+## 引用与许可证
+
+请使用 “Cite this repository” 按钮（元数据见 [CITATION.cff](CITATION.cff)）；应引用的论文：
 
 ```bibtex
 @misc{tao2024efficient,
@@ -77,3 +62,5 @@ Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructe
   doi = {10.48550/arXiv.2404.16280}
 }
 ```
+
+代码以 [MIT 许可证](LICENSE)发布。CEC 2017 评价程序和数据来自其他作者，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

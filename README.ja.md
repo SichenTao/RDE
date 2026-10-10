@@ -1,8 +1,4 @@
-# 🥈 IEEE WCCI / CEC 2024 コンペティション RDE
-
-![IEEE CEC 2024](https://img.shields.io/badge/IEEE%20CEC%202024-Runner--Up-silver)
-![Track](https://img.shields.io/badge/Track-BC--SOPs-green)
-![Language](https://img.shields.io/badge/Language-C%2B%2B%20%2B%20Python-lightgrey)
+# RDE：IEEE WCCI/CEC 2024 数値最適化コンペティション 有界制約付き単目的トラックで Runner-Up Award（[arXiv:2404.16280](https://arxiv.org/abs/2404.16280)）
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -10,61 +6,50 @@
   <strong>日本語</strong>
 </p>
 
-**RDE は、IEEE WCCI 2024 / IEEE CEC 2024 の「精度と速度を考慮した数値最適化コンペティション」における有界制約単目的トラックの Runner-Up Award エントリです。**
+RDE（Reconstructed Differential Evolution）は、IEEE WCCI 2024 / IEEE CEC 2024「精度と速度を考慮した数値最適化コンペティション」の有界制約付き単目的トラック（BC-SOPs）で Runner-Up Award を受けた差分進化ソルバーです。このリポジトリには、C++ のソース、CEC 2017 の評価プログラムとそのデータ、実行スクリプトが入っています。
 
-本リポジトリは、RDE26-SOP コンペティションリポジトリと同じ構成方針に基づく、整理済みのオープンソースパッケージを提供します。
+バージョン 1.0.0 は 2024 年の報告書の結果に対応します。バージョン 1.1.0 は Cauchy 摂動後の境界処理を修正したものです（[CHANGELOG.md](CHANGELOG.md) を参照）。
 
-## 🥈 コンペティション結果
+## コンペティション結果
 
 | 項目 | 説明 |
 | --- | --- |
 | 成績 | Runner-Up Award |
 | コンペティション | IEEE WCCI 2024 / IEEE CEC 2024 Competition on Numerical Optimization Considering Accuracy and Speed |
-| トラック | 有界制約単目的最適化 |
-| ベンチマーク | CEC 2017 実数値数値最適化問題 |
-| 実行回数 | 各問題につき 25 回の独立実行 |
-| 評価予算 | 10000 x D 回の関数評価 |
+| トラック | 有界制約付き単目的最適化（BC-SOPs） |
+| ベンチマーク | CEC 2017 実数値単目的関数 |
+| 試行回数 | 関数ごとに独立 25 試行 |
+| 予算 | 10000 x D 回の関数評価 |
 | 論文 | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
 
-## 🧭 RDE 研究ライン
-
-| 年 | 結果 | トラック | リポジトリ | 論文 |
-| --- | --- | --- | --- | --- |
-| 2024 | 🥈 Runner-Up Award | IEEE CEC 2024 BC-SOPs | [RDE](https://github.com/SichenTao/IEEE-WCCI-CEC-2024-Competition-RDE) | [arXiv:2404.16280](https://arxiv.org/abs/2404.16280) |
-| 2025 | 🥇 Rank 1 U-score | IEEE CEC 2025 RDEx シリーズ | [RDEx Series](https://github.com/SichenTao/IEEE-CEC-2025-Competition-RDEx-Series) | [SOP](https://arxiv.org/abs/2603.27089), [CSOP](https://arxiv.org/abs/2603.27090), [MOP](https://arxiv.org/abs/2603.27092), [CMOP](https://arxiv.org/abs/2604.03708) |
-| 2026 | 🏆 優勝 / 第 1 位 | IEEE WCCI 2026 / IEEE CEC 2026 RDE26 シリーズ | [SOP](https://github.com/SichenTao/RDE26-SOP), [CSOP](https://github.com/SichenTao/RDE26-CSOP), [MOP](https://github.com/SichenTao/RDE26-MOP), [CMOP](https://github.com/SichenTao/RDE26-CMOP) | コンペティション公開版 |
-
-## チーム
-
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao.
-
-## リポジトリ構成
+## ディレクトリ構成
 
 | パス | 説明 |
 | --- | --- |
-| `benchmark/` | 公開ベンチマーク資料 |
-| `code/rde-cec2024/main.py` | 実行エントリ |
-| `code/rde-cec2024/RDE.cpp` | 最終アルゴリズムのソースコード |
-| `code/rde-cec2024/cec17_test_func.cpp` | ベンチマーク評価器 |
-| `code/rde-cec2024/input_data/` | 必要なベンチマーク入力データ |
+| `code/rde-cec2024/main.py` | ビルド・実行スクリプト |
+| `code/rde-cec2024/RDE.cpp` | ソルバーのソース |
+| `code/rde-cec2024/cec17_test_func.cpp`、`malloc.h`、`input_data/` | CEC 2017 の評価プログラムとデータ |
+| `benchmark/CEC2017_SOP/` | 同じ評価プログラムとデータの独立したコピー |
+| `results/v1.1.0/` | バージョン 1.1.0 の結果（D = 30、25 試行、30 関数） |
 
-## 要件
+## 必要環境とクイックスタート
 
-- Python 3
-- C++14 コンパイラ
-- サードパーティ製 Python パッケージは不要です
-
-## クイックスタート
+Python 3 と C++14 コンパイラが必要です（既定は `g++`、`--cxx` で変更できます）。サードパーティの Python パッケージは不要です。
 
 ```bash
-python3 code/rde-cec2024/main.py
+python3 code/rde-cec2024/main.py                  # D = 30、関数 1～30、各 25 試行
+python3 code/rde-cec2024/main.py --compile-only   # ビルドのみ
 ```
 
-生成された出力は `code/rde-cec2024/outputs/` に書き込まれます。
+公開コードでは、次元は `main()` 内の `GNVarsIter` で決まります（0、1、2、3 が D = 10、30、50、100 に対応）。現在は D = 30 です。プログラムは関数 2 も実行しますが、これはコンペティションの対象外です。完全な実行は Apple シリコンの Mac の 1 コアで約 6 分でした。結果は `code/rde-cec2024/outputs/` に、関数ごとに 1 ファイル `RDE_CEC2024_D30_F<k>.txt` として書き出されます。1001 行（実行途中のチェックポイント）、試行ごとに 1 列で、それまでの最良解の誤差を記録します（1e-7 以下の誤差は 0 と書かれます）。
 
-## 引用
+## 関連リポジトリ
 
-Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructed Differential Evolution Variant by Some of the Current State-of-the-art Strategies for Solving Single Objective Bound Constrained Problems," arXiv:2404.16280, 2024.
+RDE シリーズは RDEx（2025）と RDE26（2026）に続きます。[シリーズ概要](https://github.com/SichenTao/reconstructed-differential-evolution)を参照してください。
+
+## 引用とライセンス
+
+「Cite this repository」ボタンを使ってください（メタデータは [CITATION.cff](CITATION.cff)）。引用すべき論文：
 
 ```bibtex
 @misc{tao2024efficient,
@@ -77,3 +62,5 @@ Sichen Tao, Ruihan Zhao, Kaiyu Wang, and Shangce Gao, "An Efficient Reconstructe
   doi = {10.48550/arXiv.2404.16280}
 }
 ```
+
+コードは [MIT ライセンス](LICENSE)で公開しています。CEC 2017 の評価プログラムとデータは他の著者のものです。[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を参照してください。
